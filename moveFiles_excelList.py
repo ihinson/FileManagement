@@ -34,4 +34,4 @@ for fileName in listFiles:
     else:
         print(fileName + " File does not exist")
 
-print("Copying complete.")
+print("Copying complete")
