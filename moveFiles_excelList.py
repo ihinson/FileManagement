@@ -12,7 +12,7 @@ sheet = 'Use'
 df = pd.read_excel(excel_file, sheet_name= sheet)
 
 #Create list from dataframe
-listFiles = df['LINK'].tolist()
+listFiles = df['Link'].tolist()
 
 #Verify file list
 #print(listFiles)
@@ -27,11 +27,17 @@ working_folder = directory + fileBase
 Path(working_folder).mkdir(parents=True, exist_ok=True)
 
 for fileName in listFiles:
-    #print(fileName)
-    if os.path.isfile(fileName):
-        dest_file = working_folder
-        shutil.copy(fileName, dest_file)
-    else:
-        print(fileName + " File does not exist")
+    try:
+        shutil.copy(fileName, working_folder)
+    except shutil.Error as err:
+        pass
+    except PermissionError:
+        pass
+    except FileExistsError:
+        pass
+    except OSError:
+        pass
+    except TypeError:
+        pass
 
 print("Copying complete")
