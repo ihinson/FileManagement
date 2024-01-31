@@ -5,6 +5,8 @@ import os
 import glob
 from pathlib import Path
 import shutil
+from PIL import Image
+import PyPDF2
 
 #Part I: arcgis functions
 #Workspace
@@ -113,3 +115,21 @@ for fileName in listFiles:
         pass
 
 print("Copying complete")
+
+#Convert all files to pdfs
+for filename in os.listdir(working_folder):
+    if filename.endswith('.jpg'):
+        img_path = os.path.join(working_folder, filename)
+        img = Image.open(img_path)
+        pdf_path = os.path.join(working_folder, filename[:-3] + 'pdf')
+        img.save(pdf_path, 'PDF', resolution=100.0)
+    else:
+        pass
+for filename in os.listdir(working_folder):
+    if filename.endswith(('.jpeg') OR ('.tiff')):
+        img_path = os.path.join(working_folder, filename)
+        img = Image.open(img_path)
+        pdf_path = os.path.join(working_folder, filename[:-4] + 'pdf')
+        img.save(pdf_path, 'PDF', resolution=100.0)
+    else:
+        pass
